@@ -29,6 +29,7 @@ data "aws_availability_zones" "available" {
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.64.0"
+  name = "vpc-${random_string.lb_id.result}-SFTP.${var.Stage}"
 
   cidr            = var.vpc_cidr_block
   azs             = data.aws_availability_zones.available.names
@@ -44,8 +45,8 @@ module "app_security_group" {
   source  = "terraform-aws-modules/security-group/aws//modules/web"
   version = "3.17.0"
 
-  name        = "web-sg-bobbins-dev"
-  description = "Security group for web-servers"
+  name = "app-sg-${random_string.lb_id.result}-SFTP.${var.Stage}"
+  description = "Security group for app-servers"
   vpc_id      = module.vpc.vpc_id
 
   #ingress_cidr_blocks = module.vpc.public_subnets_cidr_blocks
@@ -63,7 +64,7 @@ module "lb_security_group" {
   source  = "terraform-aws-modules/security-group/aws//modules/web"
   version = "3.17.0"
 
-  name        = "lb-sg-bobbins-dev"
+  name = "lb-sg-${random_string.lb_id.result}-SFTP.${var.Stage}"
   description = "Security group for load balancer"
   vpc_id      = module.vpc.vpc_id
 
@@ -80,7 +81,7 @@ module "elb_http" {
   version = "2.4.0"
 
   # Ensure load balancer name is unique
-  name = "lb-${random_string.lb_id.result}-bobbins-dev"
+  name = "lb-${random_string.lb_id.result}-SFTP-${var.Stage}"
 
   internal = false
 
@@ -109,6 +110,7 @@ module "elb_http" {
 
 module "ec2_instances" {
   source = "./modules/aws-instance"
+#  name = "ec2-${random_string.lb_id.result}-SFTP.${var.Stage}"
 
   instance_count = var.instance_count
   instance_type  = "t2.micro"
