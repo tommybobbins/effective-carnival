@@ -7,3 +7,9 @@ output "disk_size" {
   description = "Disk size of the EC2 instance"
   value       = lookup(var.hdd_size, var.HardDiskSize)
 }
+
+output "aws_region" {
+  description = "Region based on Stage"
+  value       = lookup(var.stage_regions, var.Stage)
+}
+

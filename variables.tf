@@ -29,11 +29,6 @@ variable "egress_rules" {
   default     = []
 }
 
-variable "Stage" {
-   description = "Development stage - latest, test, beta or prod"
-   default = "latest"
-}
-
 variable "InstanceType" {
    description = "EC2 instance type"
    default = "t2.micro"
@@ -50,6 +45,22 @@ variable "hdd_size" {
 
 variable "HardDiskSize" {
    description = "Hard drive size small (50GB), medium (100GB), large (200GB)"
-   default = "small"
    # var.HardDiskSize.values
+   default = "small"
 }
+
+variable "Stage" {
+   description = "Latest, Test, Beta or Prod. Maps to different Region for each case"
+   default = "latest"
+}
+
+variable "stage_regions" {
+  type = map
+  default = {
+    latest = "us-east-1"
+    test = "us-east-1"
+    beta = "us-east-1"
+    prod = "us-east-1"
+  }
+}
+

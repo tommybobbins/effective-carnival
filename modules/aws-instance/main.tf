@@ -25,7 +25,7 @@ resource "aws_instance" "app" {
   subnet_id              = var.subnet_ids[count.index % length(var.subnet_ids)]
   vpc_security_group_ids = var.security_group_ids
   user_data              = file("modules/aws-instance/userdata.sh")
-  tags                   = var.tags
+#  tags                   = var.tags
   root_block_device {
           volume_type = "gp2"
           volume_size = lookup(var.hdd_size, var.HardDiskSize)

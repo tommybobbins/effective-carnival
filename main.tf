@@ -6,13 +6,20 @@ terraform {
   }
 }
 
-provider "aws" {
-  region = var.aws_region
-}
-
 resource "random_string" "lb_id" {
   length  = 3
   special = false
+}
+
+provider "aws" {
+#  region = var.aws_region
+  region = lookup(var.stage_regions, var.Stage)
+  default_tags {
+    tags = {
+      ProjectName = "${random_string.lb_id.result}-SFTP.${var.Stage}"
+      Creator       = "tng@chegwin.org"
+    }
+  }
 }
 
 data "aws_availability_zones" "available" {
@@ -31,10 +38,6 @@ module "vpc" {
   enable_nat_gateway = false
   enable_vpn_gateway = false
 
-  tags = {
-    project     = "bobbins",
-    environment = "dev"
-  }
 }
 
 module "app_security_group" {
@@ -46,17 +49,14 @@ module "app_security_group" {
   vpc_id      = module.vpc.vpc_id
 
   #ingress_cidr_blocks = module.vpc.public_subnets_cidr_blocks
-  ingress_cidr_blocks = ["0.0.0.0/0"]
+  #ingress_cidr_blocks = ["0.0.0.0/0"]
+  ingress_cidr_blocks = module.vpc.public_subnets_cidr_blocks
   # Add 22 rules
   ingress_rules = ["ssh-tcp","http-80-tcp"]
   # Allow all rules for all protocols - temporary, this needs to be public subnets
   egress_cidr_blocks = ["0.0.0.0/0"]
   egress_rules       = ["all-all"]
 
-  tags = {
-    project     = "bobbins",
-    environment = "dev"
-  }
 }
 
 module "lb_security_group" {
@@ -73,10 +73,6 @@ module "lb_security_group" {
   # Allow all rules for all protocols
   egress_rules = ["all-all"]
 
-  tags = {
-    project     = "bobbins",
-    environment = "dev"
-  }
 }
 
 module "elb_http" {
@@ -109,10 +105,6 @@ module "elb_http" {
     timeout             = 5
   }
 
-  tags = {
-    project     = "bobbins",
-    environment = "dev"
-  }
 }
 
 module "ec2_instances" {
@@ -126,7 +118,6 @@ module "ec2_instances" {
   security_group_ids = [module.app_security_group.this_security_group_id]
 
   tags = {
-    project     = "bobbins",
-    environment = "dev"
+    Hostname = "${random_string.lb_id.result}-SFTP.${var.Stage}-server1"
   }
 }
