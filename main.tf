@@ -10,6 +10,11 @@ provider "aws" {
   region = var.aws_region
 }
 
+resource "random_string" "lb_id" {
+  length  = 3
+  special = false
+}
+
 data "aws_availability_zones" "available" {
   state = "available"
 }
@@ -37,14 +42,14 @@ module "app_security_group" {
   version = "3.17.0"
 
   name        = "web-sg-bobbins-dev"
-  description = "Security group for web-servers with HTTP ports open within VPC"
+  description = "Security group for web-servers"
   vpc_id      = module.vpc.vpc_id
 
   #ingress_cidr_blocks = module.vpc.public_subnets_cidr_blocks
   ingress_cidr_blocks = ["0.0.0.0/0"]
-  # Add 80/22 rules
-  ingress_rules = ["ssh-tcp"]
-  # Allow all rules for all protocols
+  # Add 22 rules
+  ingress_rules = ["ssh-tcp","http-80-tcp"]
+  # Allow all rules for all protocols - temporary, this needs to be public subnets
   egress_cidr_blocks = ["0.0.0.0/0"]
   egress_rules       = ["all-all"]
 
@@ -59,7 +64,7 @@ module "lb_security_group" {
   version = "3.17.0"
 
   name        = "lb-sg-bobbins-dev"
-  description = "Security group for load balancer with HTTP ports open within VPC"
+  description = "Security group for load balancer"
   vpc_id      = module.vpc.vpc_id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
@@ -72,11 +77,6 @@ module "lb_security_group" {
     project     = "bobbins",
     environment = "dev"
   }
-}
-
-resource "random_string" "lb_id" {
-  length  = 3
-  special = false
 }
 
 module "elb_http" {
