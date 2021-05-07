@@ -1,7 +1,15 @@
-output "public_dns_name" {
-  description = "Public DNS names of the load balancer for this project"
-  value       = module.elb_http.this_elb_dns_name
+output "alb_dns_name" {
+  value       = aws_lb.lb.dns_name
+  description = "The domain name of the load balancer"
 }
+#output "ec2_ip" {
+# value = ec2_instances.e
+#}
+
+#output "tags" {
+#   value = instances.all_tags
+#   description = "All tags"
+#}
 
 output "disk_size" {
   description = "Disk size of the EC2 instance"
@@ -13,24 +21,12 @@ output "aws_region" {
   value       = lookup(var.stage_regions, var.Stage)
 }
 
-#output "tags" {
-#  description = "Tags"
-#  value = module.vpc.this[0].all_tags
-#}
+output "project_name" {
+  description = "Project identifier to be used as the seed for others"
+  value =var.project_name
+}
 
-#output "tags" {
-#description = "List of tags of the APP and DB instances"
-#value       = [module.ec2_instances.tags.Name,
-#               module.ec2_instances.tags.Creator]
-#}
-
-
-#output "creator" {
-#  description = "Creator"
-#  value = ${lookup(aws.default_tags.tags,"Creator")}"
-#}
-
-#output "Hostname" {
-#  description = "Public DNS name of the NLB"
-#  value       = module.elb_http.this_elb_dns_name
+#output "all_tags" {
+#  description = "All Tags"
+#  value = aws.default_tags.tags[*]
 #}

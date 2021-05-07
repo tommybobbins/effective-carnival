@@ -5,10 +5,28 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-variable "instance_count" {
-  description = "Number of instances to provision."
+
+variable "project_name" {
+  description = "Project identifier to be used as the seed for others"
+  default = "bobbins1"
+}
+
+variable "desired_instance_count" {
+  description = "Required number of instances to provision."
   type        = number
   default     = 1
+}
+
+variable "min_instance_count" {
+  description = "Minimum number of instances to provision."
+  type        = number
+  default     = 1
+}
+
+variable "max_instance_count" {
+  description = "Maximum number of instances to provision."
+  type        = number
+  default     = 2
 }
 
 variable "vpc_cidr_block" {
@@ -27,6 +45,30 @@ variable "egress_rules" {
   description = "List of egress rules to create by name"
   type        = list(string)
   default     = []
+}
+
+variable "server_port" {
+  description = "The port the server will use for HTTP requests"
+  type        = number
+  default     = 80
+}
+
+variable "lb_name" {
+  description = "The name of the LB"
+  type        = string
+  default     = "lb"
+}
+
+variable "instance_security_group_name" {
+  description = "The name of the security group for the EC2 Instances"
+  type        = string
+  default     = "instance-sg"
+}
+
+variable "lb_security_group_name" {
+  description = "The name of the security group for the ALB"
+  type        = string
+  default     = "lb-sg"
 }
 
 variable "InstanceType" {
@@ -63,4 +105,3 @@ variable "stage_regions" {
     prod = "us-east-1"
   }
 }
-
