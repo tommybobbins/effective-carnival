@@ -48,9 +48,9 @@ variable "egress_rules" {
 }
 
 variable "server_port" {
-  description = "The port the server will use for HTTP requests"
+  description = "The backend port to target"
   type        = number
-  default     = 80
+  default     = 22
 }
 
 variable "lb_name" {

@@ -22,3 +22,21 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
+resource "aws_default_security_group" "default" {
+  vpc_id   = module.vpc.vpc_id
+#  description = "Default VPC group to allow ingress on SSH"
+
+  ingress {
+    protocol  = "tcp"
+    self      = true
+    from_port = var.server_port
+    to_port   = var.server_port
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
