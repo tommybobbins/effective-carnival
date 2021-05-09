@@ -3,9 +3,6 @@
 Deploy backends in ASG, ALB, NAT GW, Private or Public subnets.
 
 
-For more info, please see Chapter 2, "Getting started with Terraform", of 
-*[Terraform: Up and Running](http://www.terraformupandrunning.com)*.
-
 ## Pre-requisites
 
 * You must have [Terraform](https://www.terraform.io/) installed on your computer. 
@@ -30,7 +27,7 @@ terraform apply
 When the `apply` command completes, it will output the DNS name of the load balancer. To test the load balancer:
 
 ```
-curl http://<alb_dns_name>/
+ssh http://<nlb_dns_name>/
 ```
 
 Clean up when you're done:
