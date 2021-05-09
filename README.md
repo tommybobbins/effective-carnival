@@ -35,3 +35,10 @@ Clean up when you're done:
 ```
 terraform destroy
 ```
+
+
+## Still to do
+
+* Sync to data bucket from the ec2-instance in the cron jobs
+* Move to private subnets
+* Download ccaccount.txt from s3:// bucket every minute and apply via  create_user_accounts.sh
