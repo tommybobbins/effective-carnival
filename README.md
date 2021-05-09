@@ -40,5 +40,10 @@ terraform destroy
 ## Still to do
 
 * Sync to data bucket from the ec2-instance in the cron jobs
-* Move to private subnets
-* Download ccaccount.txt from s3:// bucket every minute and apply via  create_user_accounts.sh
+* Move to private subnets - currently failed, this has been working earlier, nlb and private subnet problems
+* Download caccount.txt from s3:// bucket every minute and apply via  create_user_accounts.sh
+* Instructions to populate caccount.txt
+
+## Given enough time
+
+* Move SFTP accounts to Parameter store or  Dynamo DB sorted by stage
