@@ -1,6 +1,6 @@
 # sFTP HA Example
 
-Deploy backends in ASG, ALB, NAT GW, Private or Public subnets.
+Deploy backends in ASG, NLB, NAT GW, Private or Public subnets.
 
 
 ## Pre-requisites
