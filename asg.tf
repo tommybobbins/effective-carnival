@@ -1,21 +1,25 @@
 resource "aws_launch_configuration" "lc" {
-  instance_type   = var.InstanceType
-  image_id        = data.aws_ami.amazon_linux.id
-  key_name        = aws_key_pair.webserver-key.key_name
-  security_groups = [aws_security_group.instance.id]
-  iam_instance_profile = "${aws_iam_instance_profile.s3_profile.name}"
+  instance_type        = var.InstanceType
+  image_id             = data.aws_ami.amazon_linux.id
+  key_name             = aws_key_pair.webserver-key.key_name
+  security_groups      = [aws_security_group.instance.id]
+  iam_instance_profile = aws_iam_instance_profile.s3_profile.name
 
-#  user_data = file("userdata.sh")
-  user_data = "${data.template_file.init.rendered}"
+  #  user_data = file("userdata.sh")
+  user_data = data.template_file.init.rendered
   root_block_device {
-          volume_type = "gp2"
-          volume_size = lookup(var.hdd_size, var.HardDiskSize)
+    volume_type = "gp2"
+    volume_size = lookup(var.hdd_size, var.HardDiskSize)
   }
   # Required when using a launch configuration with an auto scaling group.
   # https://www.terraform.io/docs/providers/aws/r/launch_configuration.html
   lifecycle {
     create_before_destroy = true
   }
+
+  depends_on = [
+    aws_s3_bucket.bucketdata,
+  ]
 }
 
 resource "aws_autoscaling_group" "asg" {
@@ -42,53 +46,53 @@ resource "aws_autoscaling_group" "asg" {
 
 
 resource "aws_autoscaling_policy" "web_policy_up" {
-  name = "web_policy_up"
-  scaling_adjustment = 1
-  adjustment_type = "ChangeInCapacity"
-  cooldown = 300
+  name                   = "web_policy_up"
+  scaling_adjustment     = 1
+  adjustment_type        = "ChangeInCapacity"
+  cooldown               = 300
   autoscaling_group_name = aws_autoscaling_group.asg.name
 }
 
 resource "aws_cloudwatch_metric_alarm" "web_cpu_alarm_up" {
-  alarm_name = "web_cpu_alarm_up"
+  alarm_name          = "web_cpu_alarm_up"
   comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods = "2"
-  metric_name = "CPUUtilization"
-  namespace = "AWS/EC2"
-  period = "120"
-  statistic = "Average"
-  threshold = "60"
+  evaluation_periods  = "10"
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/EC2"
+  period              = "120"
+  statistic           = "Average"
+  threshold           = "90"
 
   dimensions = {
     AutoScalingGroupName = aws_autoscaling_group.asg.name
   }
 
   alarm_description = "This metric monitor EC2 instance CPU utilization"
-  alarm_actions = [ aws_autoscaling_policy.web_policy_up.arn ]
+  alarm_actions     = [aws_autoscaling_policy.web_policy_up.arn]
 }
 
 resource "aws_autoscaling_policy" "web_policy_down" {
-  name = "web_policy_down"
-  scaling_adjustment = -1
-  adjustment_type = "ChangeInCapacity"
-  cooldown = 300
+  name                   = "web_policy_down"
+  scaling_adjustment     = -1
+  adjustment_type        = "ChangeInCapacity"
+  cooldown               = 300
   autoscaling_group_name = aws_autoscaling_group.asg.name
 }
 
 resource "aws_cloudwatch_metric_alarm" "web_cpu_alarm_down" {
-  alarm_name = "web_cpu_alarm_down"
+  alarm_name          = "web_cpu_alarm_down"
   comparison_operator = "LessThanOrEqualToThreshold"
-  evaluation_periods = "2"
-  metric_name = "CPUUtilization"
-  namespace = "AWS/EC2"
-  period = "120"
-  statistic = "Average"
-  threshold = "10"
+  evaluation_periods  = "2"
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/EC2"
+  period              = "120"
+  statistic           = "Average"
+  threshold           = "10"
 
   dimensions = {
     AutoScalingGroupName = aws_autoscaling_group.asg.name
   }
 
   alarm_description = "This metric monitor EC2 instance CPU utilization"
-  alarm_actions = [ aws_autoscaling_policy.web_policy_down.arn ]
+  alarm_actions     = [aws_autoscaling_policy.web_policy_down.arn]
 }

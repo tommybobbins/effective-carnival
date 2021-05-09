@@ -12,7 +12,7 @@ module "vpc" {
   enable_nat_gateway = false
   enable_vpn_gateway = false
 
-  enable_ipv6                     = true
+  enable_ipv6 = true
   #assign_ipv6_address_on_creation = true
 
   #private_subnet_assign_ipv6_address_on_creation = false
@@ -23,8 +23,8 @@ data "aws_availability_zones" "available" {
 }
 
 resource "aws_default_security_group" "default" {
-  vpc_id   = module.vpc.vpc_id
-#  description = "Default VPC group to allow ingress on SSH"
+  vpc_id = module.vpc.vpc_id
+  #  description = "Default VPC group to allow ingress on SSH"
 
   ingress {
     protocol  = "tcp"

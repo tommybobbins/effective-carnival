@@ -1,0 +1,1 @@
+* * * * * /usr/local/bin/push_localfiles.sh >/var/tmp/push_localfiles.txt 2>&1

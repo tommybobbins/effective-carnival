@@ -3,12 +3,13 @@
 #}
 
 provider "aws" {
-#  region = var.aws_region
+  #  region = var.aws_region
   region = lookup(var.stage_regions, var.Stage)
   default_tags {
     tags = {
       ProjectName = "${var.project_name}-SFTP.${var.Stage}"
-      Creator       = "tng@chegwin.org"
+      Creator     = "tng@chegwin.org"
+      Hostname    = "${var.Hostname}"
     }
   }
 }
@@ -35,13 +36,13 @@ resource "aws_lb_listener" "http" {
 }
 
 resource "aws_lb_target_group" "asg" {
-  name = var.lb_name
+  name     = var.lb_name
   port     = var.server_port
   protocol = "TCP"
   vpc_id   = module.vpc.vpc_id
 
   health_check {
-    interval            = 30
+    interval = 30
   }
 }
 

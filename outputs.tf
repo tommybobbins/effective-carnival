@@ -23,8 +23,19 @@ output "aws_region" {
 
 output "project_name" {
   description = "Project identifier to be used as the seed for others"
-  value =var.project_name
+  value       = var.project_name
 }
+
+output "config_bucket_name" {
+  description = "Bucket containing the config"
+  value       = aws_s3_bucket.bucketconfig.id
+}
+
+output "data_bucket_name" {
+  description = "Bucket containing the data"
+  value       = aws_s3_bucket.bucketdata.id
+}
+
 
 #output "all_tags" {
 #  description = "All Tags"

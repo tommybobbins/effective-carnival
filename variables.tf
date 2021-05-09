@@ -8,7 +8,17 @@ variable "aws_region" {
 
 variable "project_name" {
   description = "Project identifier to be used as the seed for others"
-  default = "bobbins1"
+  default     = "bobbins1"
+}
+
+variable "Hostname" {
+  description = "Hostname of the server which will be created"
+  default     = "instance-bobbins1"
+}
+
+variable "bucket_seed" {
+  description = "Unique Bucket seed"
+  default     = "sftp-effective-carnival"
 }
 
 variable "desired_instance_count" {
@@ -72,36 +82,36 @@ variable "lb_security_group_name" {
 }
 
 variable "InstanceType" {
-   description = "EC2 instance type"
-   default = "t2.micro"
+  description = "EC2 instance type"
+  default     = "t2.micro"
 }
 
 variable "hdd_size" {
-  type = map
+  type = map(any)
   default = {
-    small = 50
+    small  = 50
     medium = 100
-    large = 200
+    large  = 200
   }
 }
 
 variable "HardDiskSize" {
-   description = "Hard drive size small (50GB), medium (100GB), large (200GB)"
-   # var.HardDiskSize.values
-   default = "small"
+  description = "Hard drive size small (50GB), medium (100GB), large (200GB)"
+  # var.HardDiskSize.values
+  default = "small"
 }
 
 variable "Stage" {
-   description = "Latest, Test, Beta or Prod. Maps to different Region for each case"
-   default = "latest"
+  description = "Latest, Test, Beta or Prod. Maps to different Region for each case"
+  default     = "latest"
 }
 
 variable "stage_regions" {
-  type = map
+  type = map(any)
   default = {
     latest = "us-east-1"
-    test = "us-east-1"
-    beta = "us-east-1"
-    prod = "us-east-1"
+    test   = "us-east-1"
+    beta   = "us-east-1"
+    prod   = "us-east-1"
   }
 }

@@ -35,3 +35,5 @@ terraform.rc
 
 # Ignore TF lock files
 .terraform.*
+
+myfiles/caccount.txt
