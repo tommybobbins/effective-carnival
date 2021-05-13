@@ -18,6 +18,8 @@ sudo echo "    AllowTcpForwarding no" >>/etc/ssh/sshd_config
 sudo echo "    ChrootDirectory %h/uploads" >>/etc/ssh/sshd_config
 sudo echo "    ForceCommand internal-sftp" >>/etc/ssh/sshd_config
 sudo echo "    AuthorizedKeysFile /etc/ssh-pool/%u.pub" >>/etc/ssh/sshd_config
+sudo echo "BUCKET_CONFIG=${bucket_config_name}" >>/etc/sftp_buckets.conf
+sudo echo "BUCKET_DATA=${bucket_data_name}" >>/etc/sftp_buckets.conf
 sudo systemctl restart sshd
 sudo aws s3 cp s3://${bucket_config_name}/allconf.zip /tmp
 sudo cd / && unzip /tmp/allconf.zip
