@@ -43,6 +43,7 @@ terraform destroy
 * Move to private subnets - currently failed, this has been working earlier, nlb and private subnet problems
 * Download caccount.txt from s3:// bucket every minute and apply via  create_user_accounts.sh
 * Instructions to populate caccount.txt
+* Tags need to be outputted as per spec.
 
 ## Given enough time
 
