@@ -48,3 +48,6 @@ terraform destroy
 ## Given enough time
 
 * Move SFTP accounts to Parameter store or  Dynamo DB sorted by stage
+
+## In other news
+https://aws.amazon.com/blogs/aws/new-aws-transfer-for-sftp-fully-managed-sftp-service-for-amazon-s3/
