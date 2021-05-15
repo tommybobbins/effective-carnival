@@ -7,6 +7,7 @@ locals {
 resource "aws_s3_bucket" "bucketconfig" {
   bucket = "${local.config_prefix}-config"
   acl    = "private" # or can be "public-read"
+  force_destroy = true
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
@@ -19,6 +20,7 @@ resource "aws_s3_bucket" "bucketconfig" {
 resource "aws_s3_bucket" "bucketdata" {
   bucket = "${local.data_prefix}-data"
   acl    = "private" # or can be "public-read"
+  force_destroy = true
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
