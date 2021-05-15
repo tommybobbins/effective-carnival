@@ -11,6 +11,7 @@ echo "${project_name}-SFTP.${stage}" >>/usr/share/nginx/html/index.html
 echo "${bucket_config_name}" >>/usr/share/nginx/html/index.html
 sudo /usr/sbin/groupadd sftpusers
 sudo mkdir /etc/ssh-pool
+sudo sed -e "s/PasswordAuthentication no/PasswordAuthentication yes/" /etc/ssh/sshd_config
 sudo echo "Match group sftpusers" >>/etc/ssh/sshd_config
 sudo echo "   AllowUsers *" >>/etc/ssh/sshd_config
 sudo echo "    X11Forwarding no" >>/etc/ssh/sshd_config
