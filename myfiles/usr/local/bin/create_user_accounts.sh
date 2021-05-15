@@ -24,7 +24,7 @@ addsftpuser () {
     echo $1
     USER=$1
     echo "$USER"
-    useradd -g sftpusers -c "Automatic sftp user ${USER}" -s /sbin/nologin ${USER}
+    /usr/sbin/useradd -g sftpusers -c "Automatic sftp user ${USER}" -s /sbin/nologin ${USER}
     mkdir -p /home/${USER}/.ssh
     chown root:sftpusers /home/${USER}
     mkdir -p /home/${USER}/uploads/uploads
