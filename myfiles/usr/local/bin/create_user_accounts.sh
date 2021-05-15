@@ -17,6 +17,8 @@
 #    AuthorizedKeysFile /etc/ssh-pool/%u.pub
 
 
+/usr/local/bin/pull_caccounts.sh
+
 
 addsftpuser () {
     echo $1
