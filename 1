@@ -23,9 +23,7 @@ Create a file myfiles/caccount.txt which contains a file formatted as:
 ```
 username|password|rsakey
 ```
-
-Each of these SFTP accounts will be created with either a username or key or both for example foo1 will be created with an ssh key and foo2 will be created with a password starting
-d12df
+Each of these SFTP accounts will be created with either a username or key or both.
 
 ```
 foo1||ssh-rsa AAAAB3.....continues
@@ -40,7 +38,7 @@ terraform apply
 When the `apply` command completes, it will output the DNS name of the load balancer. To test the load balancer:
 
 ```
-sftp foo2@<nlb_dns_name>
+ssh http://<nlb_dns_name>/
 ```
 
 Clean up when you're done:
