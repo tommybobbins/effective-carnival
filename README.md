@@ -19,6 +19,14 @@ export AWS_SECRET_ACCESS_KEY=(your secret access key)
 
 Deploy the code:
 
+Create a file myfiles/caccount.txt which contains a file formatted similar to the following username|password|rsakey
+Each of these SFTP accounts will be created with either a username or key or both.
+
+```
+foo1||ssh-rsa AAAAB3.....continues
+foo2|d12df^d£cvik3|
+```
+
 ```
 terraform init
 terraform apply
@@ -37,10 +45,11 @@ terraform destroy
 ```
 
 
-## Still to do
+## Instructions to add new accounts
 
-* Instructions to populate caccount.txt
-* Tags need to be outputted as per spec.
+Find the bucket config name - by default this is config_bucket_name = "bobbins2-sftp-effective-carnival-latest-config".
+Download and re-upload the ccaccount.txt file held in this bucket. Accounts will be created by a cron job running on the minute.
+
 
 ## Given enough time
 

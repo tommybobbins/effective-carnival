@@ -36,8 +36,10 @@ output "data_bucket_name" {
   value       = aws_s3_bucket.bucketdata.id
 }
 
-
-#output "all_tags" {
-#  description = "All Tags"
-#  value = aws.default_tags.tags[*]
+#output "vpc_resource_level_tags" {
+#  value = provider.aws.tags
 #}
+
+output "nlb_all_tags" {
+  value = aws_lb.lb.tags_all
+}

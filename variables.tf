@@ -8,7 +8,6 @@ variable "aws_region" {
 
 variable "project_name" {
   description = "Project identifier to be used as the seed for others"
-  default     = "bobbins2"
 }
 
 variable "Hostname" {
