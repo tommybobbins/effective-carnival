@@ -1,9 +1,10 @@
 resource "aws_launch_configuration" "lc" {
   instance_type        = var.InstanceType
   image_id             = data.aws_ami.amazon_linux.id
-  key_name             = aws_key_pair.webserver-key.key_name
+  # Currently using SSM instead of keypair
+  #key_name             = aws_key_pair.webserver-key.key_name
   security_groups      = [aws_security_group.instance.id]
-  iam_instance_profile = aws_iam_instance_profile.s3_profile.name
+  iam_instance_profile = aws_iam_instance_profile.ec2_access_role.name
 
   #  user_data = file("userdata.sh")
   user_data = data.template_file.init.rendered
