@@ -26,8 +26,8 @@ resource "aws_launch_configuration" "lc" {
 resource "aws_autoscaling_group" "asg" {
   launch_configuration = aws_launch_configuration.lc.name
   # If using a private subnet, remember to enable NAT gateway in vpc.tf
-  #vpc_zone_identifier  = module.vpc.private_subnets
-  vpc_zone_identifier = module.vpc.public_subnets
+  vpc_zone_identifier  = module.vpc.private_subnets
+  #vpc_zone_identifier = module.vpc.public_subnets
 
   target_group_arns = [aws_lb_target_group.asg.arn]
   health_check_type = "ELB"
