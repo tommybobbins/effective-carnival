@@ -1,6 +1,7 @@
 # sFTP HA Example
 
-Deploy backends in ASG, NLB, NAT GW, Private or Public subnets.
+Build Highly available sftp service as a frontend to S3.
+ec2 backends deployed in an ASG, NLB, NAT GW, Private (default) or Public subnets.
 
 
 ## Pre-requisites
