@@ -11,6 +11,7 @@ resource "aws_launch_configuration" "lc" {
   root_block_device {
     volume_type = "gp2"
     volume_size = lookup(var.hdd_size, var.HardDiskSize)
+    encrypted   = true
   }
   # Required when using a launch configuration with an auto scaling group.
   # https://www.terraform.io/docs/providers/aws/r/launch_configuration.html
