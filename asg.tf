@@ -1,6 +1,6 @@
 resource "aws_launch_configuration" "lc" {
-  instance_type        = var.InstanceType
-  image_id             = data.aws_ami.amazon_linux.id
+  instance_type = var.InstanceType
+  image_id      = data.aws_ami.amazon_linux.id
   # Currently using SSM instead of keypair
   #key_name             = aws_key_pair.webserver-key.key_name
   security_groups      = [aws_security_group.instance.id]
@@ -21,13 +21,14 @@ resource "aws_launch_configuration" "lc" {
 
   depends_on = [
     aws_s3_bucket.bucketdata,
+    aws_dynamodb_table.user_accounts,
   ]
 }
 
 resource "aws_autoscaling_group" "asg" {
   launch_configuration = aws_launch_configuration.lc.name
   # If using a private subnet, remember to enable NAT gateway in vpc.tf
-  vpc_zone_identifier  = module.vpc.private_subnets
+  vpc_zone_identifier = module.vpc.private_subnets
   #vpc_zone_identifier = module.vpc.public_subnets
 
   target_group_arns = [aws_lb_target_group.asg.arn]

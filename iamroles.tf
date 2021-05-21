@@ -26,8 +26,8 @@ data "aws_iam_policy_document" "ec2_instance_assume_role_policy" {
 
 #
 resource "aws_iam_role_policy_attachment" "ec2_instance_role" {
-  role       = aws_iam_role.ec2_instance_role.name
-#  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+  role = aws_iam_role.ec2_instance_role.name
+  #  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
   policy_arn = aws_iam_policy.s3_policy.arn
 }
 

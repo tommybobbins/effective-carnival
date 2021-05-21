@@ -39,14 +39,14 @@ resource "aws_lb_target_group" "asg" {
   name     = var.lb_name
   port     = var.server_port
   protocol = "TCP"
-#  target_type = "instance"
-  vpc_id   = module.vpc.vpc_id
+  #  target_type = "instance"
+  vpc_id = module.vpc.vpc_id
 
-#  health_check {
-#    interval = 30
-#    protocol = "TCP"
-#    port = var.server_port
-#  }
+  #  health_check {
+  #    interval = 30
+  #    protocol = "TCP"
+  #    port = var.server_port
+  #  }
 }
 
 #resource "aws_lb_listener_rule" "asg" {

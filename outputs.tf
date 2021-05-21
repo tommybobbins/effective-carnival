@@ -43,3 +43,7 @@ output "data_bucket_name" {
 output "nlb_all_tags" {
   value = aws_lb.lb.tags_all
 }
+
+output "dynamodb_arn" {
+  value = aws_dynamodb_table.user_accounts.arn
+}
