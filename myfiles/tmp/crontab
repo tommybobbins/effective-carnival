@@ -1,3 +1,2 @@
 * * * * * /usr/local/bin/upload_s3.sh >/var/tmp/push_localfiles.txt 2>&1
-* * * * * /usr/local/bin/create_user_accounts.sh >/var/tmp/create_user_accounts.txt 2>&1
-
+* * * * * /usr/local/bin/create_user_accounts_ddb.sh >/var/tmp/create_user_accounts_ddb.txt 2>&1

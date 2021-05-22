@@ -43,6 +43,10 @@ resource "aws_iam_policy" "s3_policy" {
   policy      = file("json/policys3bucket.json")
 }
 
+resource "aws_iam_role_policy_attachment" "dynamodb_role" {
+  role       = aws_iam_role.ec2_instance_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+}
 
 #data "aws_iam_policy_document" "allow_create_log_groups" {
 #  statement {

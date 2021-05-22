@@ -1,0 +1,16 @@
+# Example showing ssh key and password. The password will be ignored in this case.
+# The ssh_key should be populated with a proper SSH key.
+
+{
+  "user": {"S": "an_example_username"},
+  "password": {"S": "this_is_also_a_bad_password_changeme"},
+  "ssh_key": {"S": "this SSH key will be used instead of the password. Replace with a good key"}
+}
+
+# Example showing no key (ssh_key=null). Password will be used for this case
+
+{
+  "user": {"S": "an_example_username2"},
+  "password": {"S": "as_the_ssh_key_is_null_this_password_will_be_generated"},
+  "ssh_key": {"S": "null"}
+}

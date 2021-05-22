@@ -4,7 +4,7 @@ sudo systemctl enable nginx --now
 # Install stress for increasing asg 
 sudo amazon-linux-extras install epel
 sudo yum update -y 
-sudo yum install -y stress zip unzip
+sudo yum install -y stress zip unzip jq
 echo "<h1>Hello Bobbins!</h1>" | sudo tee /usr/share/nginx/html/index.html
 /usr/bin/hostname >> /usr/share/nginx/html/index.html
 echo "${project_name}-SFTP.${stage}" >>/usr/share/nginx/html/index.html
@@ -23,6 +23,7 @@ sudo echo "    AuthorizedKeysFile /etc/ssh-pool/%u.pub" >>/etc/ssh/sshd_config
 sudo echo "BUCKET_CONFIG=${bucket_config_name}" >>/etc/sftp_buckets.conf
 sudo echo "BUCKET_DATA=${bucket_data_name}" >>/etc/sftp_buckets.conf
 sudo echo "DYNAMO_DBTABLE=${dynamo_db_table}" >>/etc/sftp_buckets.conf
+sudo echo "AWS_REGION=${aws_region}" >>/etc/sftp_buckets.conf
 sudo systemctl restart sshd
 sudo aws s3 cp s3://${bucket_config_name}/allconf.zip /tmp
 sudo cd / && unzip /tmp/allconf.zip

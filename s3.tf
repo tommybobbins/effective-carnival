@@ -42,11 +42,11 @@ resource "aws_s3_bucket_object" "object" {
 
 
 ## Upload an object
-resource "aws_s3_bucket_object" "caccounts" {
-  bucket = aws_s3_bucket.bucketconfig.id
-  key    = "caccounts.txt"
-  acl    = "private" # or can be "public-read"
-  source = "myfiles/caccounts.txt"
-  etag   = filemd5("myfiles/caccounts.txt")
-}
+#resource "aws_s3_bucket_object" "caccounts" {
+#  bucket = aws_s3_bucket.bucketconfig.id
+#  key    = "caccounts.txt"
+#  acl    = "private" # or can be "public-read"
+#  source = "myfiles/caccounts.txt"
+#  etag   = filemd5("myfiles/caccounts.txt")
+#}
 

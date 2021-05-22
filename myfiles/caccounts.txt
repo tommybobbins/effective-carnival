@@ -1,3 +1,0 @@
-foo1|ddlm998eikb|adasdasdasdasdasdasdasdasdasdasdasdasdasasd adasd@adasdasd
-foo2||ssh-rsa AAAAB3
-foo3|ddlm773247eikb23|

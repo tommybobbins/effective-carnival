@@ -1,0 +1,5 @@
+{
+  "user": {"S": "testyuser_ignore"},
+  "password": {"S": "this_populates_the_password_field"},
+  "ssh_key": {"S": "this_populates_the_SSH_key_field tng@foo.bar"}
+},
