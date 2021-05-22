@@ -17,7 +17,7 @@ resource "aws_dynamodb_table" "user_accounts" {
 
 # This creates an example user in Dynamo DB so that it is clear what fields to populate.
 resource "aws_dynamodb_table_item" "user_accounts_data" {
-  table_name = "${aws_dynamodb_table.user_accounts.name}"
-  hash_key   = "${aws_dynamodb_table.user_accounts.hash_key}"
-  item      = file("json/dynamodb_usertemplate.json")
+  table_name = aws_dynamodb_table.user_accounts.name
+  hash_key   = aws_dynamodb_table.user_accounts.hash_key
+  item       = file("json/dynamodb_usertemplate.json")
 }
