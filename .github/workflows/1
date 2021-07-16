@@ -33,13 +33,11 @@ jobs:
 
     # Checks that all Terraform configuration files validate
     - name: Terraform Validate
-      id: validate
       run: terraform validate -no-color
       #continue-on-error: true
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
-      id: fmt
       run: terraform fmt -check
       #continue-on-error: true
 
