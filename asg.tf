@@ -9,8 +9,8 @@ resource "aws_launch_configuration" "lc" {
   #  user_data = file("userdata.sh")
   user_data = data.template_file.init.rendered
   root_block_device {
-    volume_type  = "gp2"
-    volume_size = lookup(var.hdd_size, var.HardDiskSize)
+    volume_type = "gp2"
+    volume_size  = lookup(var.hdd_size, var.HardDiskSize)
     encrypted   = true
   }
   # Required when using a launch configuration with an auto scaling group.
@@ -51,7 +51,7 @@ resource "aws_autoscaling_group" "asg" {
 resource "aws_autoscaling_policy" "web_policy_up" {
   name                   = "web_policy_up"
   scaling_adjustment     = 1
-  adjustment_type         = "ChangeInCapacity"
+  adjustment_type        = "ChangeInCapacity"
   cooldown               = 300
   autoscaling_group_name = aws_autoscaling_group.asg.name
 }
