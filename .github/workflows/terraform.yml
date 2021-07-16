@@ -35,7 +35,6 @@ jobs:
       run: terraform validate -no-color
       #continue-on-error: true
 
-
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       run: terraform fmt -check
@@ -50,9 +49,7 @@ jobs:
         script: |
           const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
           #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-          #### Terraform Format 🤖\`${{ steps.format.outputs.stdout }}\`
           #### Terraform Validation 🤖\`${{ steps.validate.outputs.stdout }}\`
-      
           *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
         
           github.issues.createComment({
