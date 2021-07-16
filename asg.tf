@@ -10,7 +10,7 @@ resource "aws_launch_configuration" "lc" {
   user_data = data.template_file.init.rendered
   root_block_device {
     volume_type = "gp2"
-    volume_size  = lookup(var.hdd_size, var.HardDiskSize)
+    volume_size = lookup(var.hdd_size, var.HardDiskSize)
     encrypted   = true
   }
   # Required when using a launch configuration with an auto scaling group.
