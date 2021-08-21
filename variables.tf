@@ -12,7 +12,7 @@ variable "project_name" {
 
 variable "Hostname" {
   description = "Hostname of the server which will be created"
-  default     = "instance-bobbins1"
+  default           = "instance-bobbins1"
 }
 
 variable "bucket_seed" {
