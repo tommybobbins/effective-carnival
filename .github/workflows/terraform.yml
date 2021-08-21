@@ -42,7 +42,7 @@ jobs:
     - name: Terraform Format
       id: fmt
       #run: terraform fmt -check
-      run: terraform fmt -check
+      run: terraform fmt 
       continue-on-error: true
 
     - uses: actions/github-script@0.9.0
