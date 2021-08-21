@@ -66,9 +66,8 @@ jobs:
         
     - name: Github push
       id: github-push
-      #if: github.event_name == 'pull_request'
-      #continue-on-error: true
-      #if: steps.fmt.outputs.modified == 'true'
+      if: github.event_name == 'pull_request' && steps.fmt.outputs.modified == 'true'
+      continue-on-error: true
       run: |
         git config --global user.name 'Github auto formatter'
         git config --global user.email 'autoformat@users.noreply.github.com'
