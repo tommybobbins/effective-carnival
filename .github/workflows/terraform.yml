@@ -63,11 +63,14 @@ jobs:
         
     - name: Github push
       id: github-push
-      if: steps.fmt.outputs.modified == 'true'
+      #if: steps.fmt.outputs.modified == 'true'
       continue-on-error: true
       run: |
+        echo "The event.name = ${{ steps.fmt.outputs.stdout }}"
+        echo "The modified = ${{ steps.fmt.outputs.modified }}"
+        echo "The stdout = ${{ steps.fmt.outputs.stdout }}"
         git config --global user.name 'Github auto formatter'
         git config --global user.email 'autoformat@users.noreply.github.com'
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-        git commit -am "Automated changes"
-        git push
+        git commit -am "Terraform formatting"
+        git push origin
