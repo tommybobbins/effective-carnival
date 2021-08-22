@@ -1,9 +1,6 @@
 name: 'Terraform'
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
 
 jobs:
@@ -46,7 +43,7 @@ jobs:
       continue-on-error: true
 
     - uses: actions/github-script@0.9.0
-      if: github.event_name == 'pull_request'
+      #if: github.event_name == 'pull_request'
       env:
         PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
       with:
@@ -66,7 +63,7 @@ jobs:
         
     - name: Github push
       id: github-push
-      if: github.event_name == 'pull_request' && steps.fmt.outputs.modified == 'true'
+      if: steps.fmt.outputs.modified == 'true'
       continue-on-error: true
       run: |
         git config --global user.name 'Github auto formatter'
