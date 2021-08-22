@@ -109,9 +109,9 @@ variable "stage_regions" {
   type = map(any)
   default = {
     latest = "us-east-1"
-    test   = "us-east-1"
+    test                 = "us-east-1"
     beta   = "us-east-1"
-    prod   = "us-east-1"
+    prod            = "us-east-1"
   }
 }
 
