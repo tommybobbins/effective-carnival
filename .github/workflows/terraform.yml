@@ -65,21 +65,21 @@ jobs:
             body: output
           })
         
-#    - name: Github push
-#      id: github-push
+    - name: Github push
+      id: github-push
 #      #if: steps.fmt.outputs.modified == 'true'
-#      continue-on-error: true
-#      run: |
-#        echo "The event.name = ${{ steps.fmt.outputs.stdout }}"
-#        echo "The modified = ${{ steps.fmt.outputs.modified }}"
-#        echo "The stdout = ${{ steps.fmt.outputs.stdout }}"
-#        echo "The conclusion = ${{ steps.fmt.conclusion }}"
-#        echo "The outcome = ${{ steps.fmt.outcome }}"
-#        git config --global user.name 'Github auto formatter'
-#        git config --global user.email 'autoformat@users.noreply.github.com'
-#        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-#        git commit -am "Terraform formatting"
-#        git push origin
+      continue-on-error: true
+      run: |
+        echo "The event.name = ${{ steps.fmt.outputs.stdout }}"
+        echo "The modified = ${{ steps.fmt.outputs.modified }}"
+        echo "The stdout = ${{ steps.fmt.outputs.stdout }}"
+        echo "The conclusion = ${{ steps.fmt.conclusion }}"
+        echo "The outcome = ${{ steps.fmt.outcome }}"
+        git config --global user.name 'Github auto formatter'
+        git config --global user.email 'autoformat@users.noreply.github.com'
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+        git commit -am "Terraform formatting"
+        git push origin
 #
     - name: Git Auto Commit
       id: git-auto-commit
@@ -121,11 +121,9 @@ jobs:
         # push_options: '--force'
         # Optional. Disable dirty check and always try to create a commit and push
         skip_dirty_check: true    
-    
         # Optional. Skip internal call to `git fetch`
         skip_fetch: true    
-    
-       # Optional. Prevents the shell from expanding filenames. 
-       # Details: https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html
-       #disable_globbing: true
+        # Optional. Prevents the shell from expanding filenames. 
+        # Details: https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html
+        #disable_globbing: true
 
