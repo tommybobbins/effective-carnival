@@ -81,7 +81,8 @@ jobs:
 #        git commit -am "Terraform formatting"
 #        git push origin
 #
-    - name: git-auto-commit
+    - name: Git Auto Commit
+      id: git-auto-commit
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         # Optional, but recommended
