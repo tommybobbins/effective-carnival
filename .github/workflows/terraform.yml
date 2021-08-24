@@ -1,8 +1,7 @@
 name: 'Terraform'
 
 on:
-        #  pull_request:
-  push:
+  pull_request:
 
 jobs:
   terraform:
@@ -65,6 +64,7 @@ jobs:
             repo: context.repo.repo,
             body: output
           })
+      continue-on-error: true
         
     - name: Github push
       id: github-push
