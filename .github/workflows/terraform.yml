@@ -3,6 +3,7 @@ name: 'Terraform'
 on:
         #  pull_request:
   push:
+
 jobs:
   terraform:
     name: 'Terraform'
