@@ -34,10 +34,19 @@ jobs:
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
-      id: fmt
+      id: tf_fmt
       #run: terraform fmt -check
       run: terraform fmt 
       continue-on-error: true
+
+    - name: Format output
+      id: github-push
+      #if: steps.tf_fmt.outputs.modified == 'true'
+      continue-on-error: true
+      run: |
+        echo "The event.name = ${{ steps.tf_fmt.outputs.stdout }}"
+        echo "The modified = ${{ steps.tf_fmt.outputs.modified }}"
+        echo "The stdout = ${{ steps.tf_fmt.outputs.stdout }}"
 
     - uses: actions/github-script@0.9.0
       if: github.event_name == 'pull_request'
