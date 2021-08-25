@@ -38,7 +38,8 @@ jobs:
       #run: terraform fmt -check
       run: |
         terraform fmt 
-        echo "::set-output name=status_code::$?"
+        STATUS_CODE=$?
+        echo "::set-output name=status_code::${STATUS_CODE}"
       continue-on-error: true
 
     - name: Format output
