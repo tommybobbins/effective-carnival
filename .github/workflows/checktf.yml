@@ -48,12 +48,13 @@ jobs:
       run: |
         echo "The outcome was = ${{ steps.tf_fmt.outcome }}"
         echo "The status_code was = ${{ steps.tf_fmt.status_code }}"
+        echo "The status_code was = ${{ steps.tf_fmt.outputs.status_code }}"
         echo "The event.name = ${{ steps.tf_fmt.outputs.stdout }}"
         echo "The modified = ${{ steps.tf_fmt.outputs.modified }}"
         echo "The stdout = ${{ steps.tf_fmt.outputs.error }}"
 
     - uses: actions/github-script@0.9.0
-      if: steps.tf_fmt.outputs.status_code != 0 && github.event_name == 'pull_request'
+      if: ${{ steps.tf_fmt.outputs.stdout }} != "" && github.event_name == "pull_request"
       #if: github.event_name == 'pull_request'
       env:
         PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
