@@ -36,20 +36,22 @@ jobs:
     - name: Terraform Format
       id: tf_fmt
       #run: terraform fmt -check
-      run: terraform fmt 
+      run: |
+        terraform fmt 
+        echo "::set-output name=status_code::$(echo $?)\n"
       continue-on-error: true
 
     - name: Format output
       id: github-push
-      #if: steps.tf_fmt.outputs.modified == 'true'
       continue-on-error: true
       run: |
         echo "The event.name = ${{ steps.tf_fmt.outputs.stdout }}"
         echo "The modified = ${{ steps.tf_fmt.outputs.modified }}"
-        echo "The stdout = ${{ steps.tf_fmt.outputs.stdout }}"
+        echo "The stdout = ${{ steps.tf_fmt.outputs.error }}"
 
     - uses: actions/github-script@0.9.0
-      if: github.event_name == 'pull_request'
+      if: steps.tf_fmt.outputs.status_code != 0 && github.event_name == 'pull_request'
+      #if: github.event_name == 'pull_request'
       env:
         PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
       with:
