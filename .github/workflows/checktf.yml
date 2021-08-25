@@ -45,6 +45,7 @@ jobs:
       id: github-push
       continue-on-error: true
       run: |
+        echo "The outcome was = ${{ steps.tf_fmt.outcome }}"
         echo "The event.name = ${{ steps.tf_fmt.outputs.stdout }}"
         echo "The modified = ${{ steps.tf_fmt.outputs.modified }}"
         echo "The stdout = ${{ steps.tf_fmt.outputs.error }}"
