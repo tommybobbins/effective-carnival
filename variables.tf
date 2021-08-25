@@ -11,7 +11,7 @@ variable "project_name" {
 }
 
 variable "Hostname" {
-  description            = "Hostname of the server which will be created"
+  description = "Hostname of the server which will be created"
   default     = "instance-bobbins1"
 }
 
