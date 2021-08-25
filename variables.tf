@@ -1,7 +1,7 @@
 # Variable declarations
 variable "aws_region" {
   description = "AWS region"
-  type         = string
+  type        = string
   default     = "us-east-1"
 }
 
@@ -111,7 +111,7 @@ variable "stage_regions" {
     latest = "us-east-1"
     test   = "us-east-1"
     beta   = "us-east-1"
-    prod    = "us-east-1"
+    prod   = "us-east-1"
   }
 }
 
