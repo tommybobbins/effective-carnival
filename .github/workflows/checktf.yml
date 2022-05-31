@@ -24,7 +24,6 @@ jobs:
       id: init
       run: |
            terraform init
-           find . -ls
 
     # Checks that all Terraform configuration files validate
     - name: Terraform Validate
